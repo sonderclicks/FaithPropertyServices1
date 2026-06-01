@@ -1,0 +1,21 @@
+# Screenshots (dev only)
+ss-*.png
+ss-*.cjs
+mob-*.png
+mob-*.cjs
+screenshot-*.png
+
+# Node
+node_modules/
+package-lock.json
+package.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services — Faith Property Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── SERVICE SELECTOR ── */
+#selector{padding:7rem 5vw;background:var(--bg)}
+.sel-wrap{display:grid;grid-template-columns:280px 1fr;gap:1.5rem;margin-top:3.5rem;max-width:1100px;align-items:start}
+.sel-list{display:flex;flex-direction:column;gap:.35rem;position:sticky;top:6rem}
+.sel-btn{display:flex;align-items:center;gap:.75rem;padding:.82rem 1.1rem;width:100%;text-align:left;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-left:3px solid transparent;border-radius:10px;color:rgba(255,255,255,.5);cursor:pointer;font-family:inherit;font-size:.83rem;font-weight:600;transition:all .22s}
+.sel-btn:hover{background:rgba(6,182,212,.07);border-color:rgba(6,182,212,.18);color:var(--white)}
+.sel-btn.active{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.3);border-left-color:var(--teal);color:var(--teal)}
+.sel-btn i:first-child{font-size:1rem;width:20px;flex-shrink:0}
+.sel-arr{margin-left:auto;opacity:0;transition:opacity .2s,transform .2s;font-size:.8rem}
+.sel-btn.active .sel-arr,.sel-btn:hover .sel-arr{opacity:1;transform:translateX(2px)}
+.sel-panel{background:rgba(6,182,212,.03);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:opacity .25s,transform .25s}
+.sel-img{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
+.sel-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.sel-panel:hover .sel-img img{transform:scale(1.03)}
+.sel-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,14,26,.6) 0%,transparent 50%)}
+.sel-body{padding:2rem}
+.sel-title{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.6rem}
+.sel-desc{font-size:.9rem;color:rgba(255,255,255,.52);line-height:1.7;margin-bottom:1.4rem}
+.sel-checks{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.6rem;list-style:none}
+.sel-checks li{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.65)}
+.sel-checks li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+/* ── ALL SERVICES GRID ── */
+#all-svcs{padding:7rem 5vw;background:var(--bg2)}
+.svcs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;margin-top:3rem;border:1px solid rgba(6,182,212,.1);border-radius:16px;overflow:hidden;max-width:1100px}
+.svc-item{padding:1.6rem 1.5rem;background:rgba(6,182,212,.025);transition:background .3s;position:relative;overflow:hidden}
+.svc-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--amber));transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.svc-item:hover{background:rgba(6,182,212,.06)}.svc-item:hover::after{transform:scaleX(1)}
+.svc-ico{font-size:1.3rem;color:var(--teal);margin-bottom:.85rem;display:block;transition:color .3s}
+.svc-item:hover .svc-ico{color:var(--amber)}
+.svc-item h3{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+.svc-item p{font-size:.77rem;color:rgba(255,255,255,.36);line-height:1.55}
+
+/* ── SECTORS ── */
+#sectors{padding:7rem 5vw;background:var(--bg)}
+.sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem;max-width:1100px}
+.sec-card{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/4}
+.sec-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1),filter .5s}
+.sec-card:hover img{transform:scale(1.07)}
+.sec-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,14,26,.95) 0%,rgba(2,14,26,.4) 55%,transparent 100%);transition:opacity .3s}
+.sec-reveal{position:absolute;inset:0;background:rgba(6,182,212,.07);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.sec-card:hover .sec-reveal{opacity:1}.sec-card:hover .sec-grad{opacity:.7}
+.sec-cl{list-style:none;text-align:center}
+.sec-cl li{font-size:.75rem;color:rgba(255,255,255,.8);padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.sec-cl li:last-child{border-bottom:none}
+.sec-info{position:absolute;bottom:1.3rem;left:1.3rem;z-index:1;transition:transform .3s}
+.sec-card:hover .sec-info{transform:translateY(-4px)}
+.sec-info h3{font-size:.95rem;font-weight:800;margin-bottom:.2rem}
+.sec-info p{font-size:.72rem;color:rgba(255,255,255,.48)}
+
+@media(max-width:1024px){
+  .sel-wrap{grid-template-columns:1fr}
+  .sel-list{position:relative;top:0;display:grid;grid-template-columns:repeat(4,1fr)}
+  .sel-arr{display:none}
+  .sec-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  /* Selector */
+  #selector,#all-svcs,#sectors{padding:4.5rem 5vw}
+  .sel-list{grid-template-columns:1fr 1fr;gap:.4rem}
+  .sel-btn{font-size:.76rem;padding:.7rem .75rem;gap:.45rem}
+  .sel-btn i:first-child{display:none} /* hide icon on small screens to save space */
+  .sel-body{padding:1.4rem}
+  .sel-title{font-size:1.15rem}
+  .sel-checks{grid-template-columns:1fr;gap:.35rem}
+  /* All services grid */
+  .svcs-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-item{padding:1.2rem}
+  /* Sectors */
+  .sec-grid{grid-template-columns:1fr}
+  .sec-card{aspect-ratio:16/9}
+}
+@media(max-width:480px){
+  .sel-list{grid-template-columns:1fr 1fr}
+  .svcs-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="https://faithpropertyservices.com.au/wp-content/uploads/2025/10/main-logo.svg" alt="Faith Property Services" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="fb">Faith <span style="color:var(--teal)">Property</span></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-cta">Free Quote</a>
+  </div>
+  <button class="burger" id="burgerBtn"><i class="bi bi-list"></i></button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://faithpropertyservices.com.au/wp-content/uploads/2026/03/commercial-cleaning-768x575.jpg')"></div>
+  <div class="page-hero-content">
+    <div class="eyebrow" style="opacity:0;animation:fadeUp .6s .2s forwards">16+ Services Available</div>
+    <h1 style="opacity:0;animation:fadeUp .7s .35s forwards">Our Cleaning <span class="grad">Services</span></h1>
+    <p style="opacity:0;animation:fadeUp .7s .5s forwards">Find the right cleaning solution for your space. Select a service to see exactly what's included.</p>
+  </div>
+</section>
+
+<!-- INTERACTIVE SERVICE SELECTOR -->
+<section id="selector">
+  <div class="sr"><div class="eyebrow">Find Your Service</div></div>
+  <div class="sr d1"><h2 class="h2">What Are You Looking For?</h2></div>
+  <div class="sr d2"><p class="lead">Click a service to see the full scope, checklist, and get a tailored quote.</p></div>
+  <div class="sel-wrap sr d3">
+    <div class="sel-list" id="selList">
+      <button class="sel-btn active" data-i="0"><i class="bi bi-briefcase"></i>Office Cleaning<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="1"><i class="bi bi-mortarboard"></i>School Cleaning<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="2"><i class="bi bi-hospital"></i>Medical Cleaning<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="3"><i class="bi bi-tools"></i>Industrial Cleaning<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="4"><i class="bi bi-key"></i>End of Lease<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="5"><i class="bi bi-droplet-fill"></i>Steam Cleaning<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="6"><i class="bi bi-moisture"></i>Pressure Washing<i class="bi bi-chevron-right sel-arr"></i></button>
+      <button class="sel-btn" data-i="7"><i class="bi bi-window"></i>Window Cleaning<i class="bi bi-chevron-right sel-arr"></i></button>
+    </div>
+    <div class="sel-panel" id="selPanel">
+      <div class="sel-img"><img id="selImg" src="" alt=""><div class="sel-img-ov"></div></div>
+      <div class="sel-body">
+        <h3 class="sel-title" id="selTitle"></h3>
+        <p class="sel-desc" id="selDesc"></p>
+        <ul class="sel-checks" id="selChecks"></ul>
+        <a href="contact.html" class="btn btn-teal"><i class="bi bi-calendar2-check-fill"></i>Get a Quote for This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- ALL 16 SERVICES -->
+<section id="all-svcs">
+  <div class="sr"><div class="eyebrow">All Services</div></div>
+  <div class="sr d1"><h2 class="h2">Every Service We Offer</h2></div>
+  <div class="sr d2"><p class="lead">16+ specialist services for every type of property across Victoria and New Zealand.</p></div>
+  <div class="svcs-grid">
+    <div class="svc-item sr d1"><i class="bi bi-building svc-ico"></i><h3>Commercial Cleaning</h3><p>Offices, corporate facilities &amp; commercial spaces.</p></div>
+    <div class="svc-item sr d2"><i class="bi bi-tools svc-ico"></i><h3>Industrial Cleaning</h3><p>Warehouses, factories &amp; production sites.</p></div>
+    <div class="svc-item sr d3"><i class="bi bi-briefcase svc-ico"></i><h3>Office Cleaning</h3><p>Daily, weekly or periodic workplace cleans.</p></div>
+    <div class="svc-item sr d4"><i class="bi bi-shop svc-ico"></i><h3>Shopping Centre</h3><p>High-traffic retail &amp; shopping environments.</p></div>
+    <div class="svc-item sr d1"><i class="bi bi-hospital svc-ico"></i><h3>Hospital &amp; Healthcare</h3><p>Medical-grade protocols for clinical settings.</p></div>
+    <div class="svc-item sr d2"><i class="bi bi-mortarboard svc-ico"></i><h3>School &amp; Education</h3><p>Safe cleaning for classrooms and common areas.</p></div>
+    <div class="svc-item sr d3"><i class="bi bi-cart3 svc-ico"></i><h3>Supermarket Cleaning</h3><p>Food-safe hygienic retail environments.</p></div>
+    <div class="svc-item sr d4"><i class="bi bi-heart-pulse svc-ico"></i><h3>Fitness Centre</h3><p>Gyms &amp; recreation facilities cleaned thoroughly.</p></div>
+    <div class="svc-item sr d1"><i class="bi bi-house-heart svc-ico"></i><h3>Home &amp; Domestic</h3><p>Professional residential cleaning on your terms.</p></div>
+    <div class="svc-item sr d2"><i class="bi bi-droplet-fill svc-ico"></i><h3>Steam Cleaning</h3><p>Carpets, upholstery, tiles &amp; hard floors.</p></div>
+    <div class="svc-item sr d3"><i class="bi bi-moisture svc-ico"></i><h3>High Pressure</h3><p>Driveways, car parks &amp; building exteriors.</p></div>
+    <div class="svc-item sr d4"><i class="bi bi-window svc-ico"></i><h3>Window Cleaning</h3><p>Streak-free glass cleaning at any height.</p></div>
+    <div class="svc-item sr d1"><i class="bi bi-hammer svc-ico"></i><h3>After Builders</h3><p>Post-construction clean ready for occupation.</p></div>
+    <div class="svc-item sr d2"><i class="bi bi-shield-check svc-ico"></i><h3>Strip &amp; Seal</h3><p>Floor stripping &amp; resealing for lasting shine.</p></div>
+    <div class="svc-item sr d3"><i class="bi bi-brush svc-ico"></i><h3>Graffiti Removal</h3><p>Fast, effective removal from any surface.</p></div>
+    <div class="svc-item sr d4"><i class="bi bi-key svc-ico"></i><h3>End of Lease</h3><p>Bond-back guaranteed lease handover cleans.</p></div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="sr"><div class="eyebrow">Industries</div></div>
+  <div class="sr d1"><h2 class="h2">Built for Every Environment</h2></div>
+  <div class="sr d2"><p class="lead">Hover each industry to see exactly what we clean — every sector, every detail.</p></div>
+  <div class="sec-grid sr d3" style="max-width:1100px">
+    <div class="sec-card"><img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/commercial-cleaning-768x575.jpg" alt="Commercial" loading="lazy"><div class="sec-grad"></div><div class="sec-reveal"><ul class="sec-cl"><li>Open-plan offices</li><li>Meeting rooms</li><li>Kitchens &amp; breakrooms</li><li>Restrooms</li><li>Reception areas</li><li>Lobbies &amp; foyers</li></ul></div><div class="sec-info"><h3>Commercial &amp; Office</h3><p>Offices, retail &amp; corporates</p></div></div>
+    <div class="sec-card"><img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/industry-cleaning.jpg" alt="Industrial" loading="lazy"><div class="sec-grad"></div><div class="sec-reveal"><ul class="sec-cl"><li>Factory floors</li><li>Machinery &amp; equipment</li><li>Loading docks</li><li>High-level areas</li><li>Warehouses</li><li>Amenities &amp; offices</li></ul></div><div class="sec-info"><h3>Industrial</h3><p>Factories &amp; warehouses</p></div></div>
+    <div class="sec-card"><img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/healthcare-edu-cleaning.jpg" alt="Healthcare" loading="lazy"><div class="sec-grad"></div><div class="sec-reveal"><ul class="sec-cl"><li>Patient rooms</li><li>Operating theatres</li><li>Waiting areas</li><li>Classrooms</li><li>Laboratories</li><li>Canteens &amp; halls</li></ul></div><div class="sec-info"><h3>Healthcare &amp; Education</h3><p>Hospitals, clinics &amp; schools</p></div></div>
+    <div class="sec-card"><img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/fitness-center-cleaning.jpg" alt="Fitness" loading="lazy"><div class="sec-grad"></div><div class="sec-reveal"><ul class="sec-cl"><li>Gym floors &amp; equipment</li><li>Change rooms</li><li>Pool &amp; spa areas</li><li>Studio spaces</li><li>Café &amp; reception</li><li>Squash courts</li></ul></div><div class="sec-info"><h3>Fitness &amp; Leisure</h3><p>Gyms, pools &amp; rec centres</p></div></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="sr">
+    <h2 class="cta-headline">Can't Find What You Need?</h2>
+    <p>We offer more than what's listed. Get in touch and we'll build a custom cleaning plan around your exact requirements.</p>
+    <div class="cta-row">
+      <a href="contact.html" class="btn btn-amber"><i class="bi bi-envelope-fill"></i>Contact Us</a>
+      <a href="tel:1300849252" class="cta-phone"><i class="bi bi-telephone-fill"></i>1300 849 252</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="ft-logo"><img src="https://faithpropertyservices.com.au/wp-content/uploads/2025/10/main-logo.svg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="fb2">Faith Property Services</div><p>Creating cleaner, safer, and more professional spaces — one site at a time.</p></div>
+    <div class="ft-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+    <div class="ft-col"><h4>Top Services</h4><a href="services.html">Commercial Cleaning</a><a href="services.html">End of Lease</a><a href="services.html">Steam Cleaning</a><a href="services.html">Industrial</a></div>
+    <div class="ft-col"><h4>Contact</h4><a href="tel:1300849252">1300 849 252</a><a href="tel:0423204386">0423 204 386</a><span>Clyde North VIC 3978</span></div>
+  </div>
+  <div class="ft-bottom"><div class="ft-copy">&copy; 2025 Faith Property Services Pty Ltd.</div><div class="ft-tag">"Creating cleaner, safer, more professional spaces."</div></div>
+</footer>
+<a href="tel:1300849252" class="fab"><div class="fab-ring"></div><i class="bi bi-telephone-fill"></i>1300 849 252</a>
+
+<script>
+const SVCS=[
+  {n:'Office Cleaning',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/commercial-cleaning-768x575.jpg',d:'Professional cleaning for corporate offices and workplaces of all sizes throughout Victoria.',c:['Desks & workstations','Meeting & boardrooms','Kitchen & breakrooms','Restrooms & facilities','Floors & carpets','Reception & lobbies']},
+  {n:'School Cleaning',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/healthcare-edu-cleaning.jpg',d:'Safe, thorough cleaning for schools, TAFEs, and all educational environments.',c:['Classrooms & hallways','Libraries & computer labs','Cafeterias & kitchens','Sports & gym facilities','Restrooms','Administration areas']},
+  {n:'Medical Cleaning',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/healthcare-edu-cleaning.jpg',d:'Medical-grade cleaning protocols for hospitals, clinics, and aged care facilities.',c:['Patient rooms & wards','Waiting & reception areas','Operating theatres','Medical equipment','Restrooms & sluice rooms','Staff & admin areas']},
+  {n:'Industrial Cleaning',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/industry-cleaning.jpg',d:'Heavy-duty cleaning for factories, warehouses, and large production facilities.',c:['Factory floors & machinery','Loading docks & yards','Warehouse storage areas','High-level & racking areas','Amenities & offices','Waste & hazardous removal']},
+  {n:'End of Lease',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/bringing-professional-cleaning.jpg',d:'Bond-back guaranteed cleaning for residential and commercial lease handovers.',c:['Full kitchen deep clean','Bathroom & toilet clean','Carpet steam cleaning','Window cleaning','Wall spot cleaning','Oven & appliances']},
+  {n:'Steam Cleaning',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/05/home-steam-clean.jpg',d:'Professional hot water extraction for carpets, upholstery, tiles, and hard floors.',c:['Carpet deep extraction','Upholstery & sofas','Tile & grout cleaning','Hard floor restoration','Mattress sanitising','Stain removal']},
+  {n:'Pressure Washing',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/bringing-professional-cleaning.jpg',d:'High-pressure cleaning for driveways, building exteriors, and all outdoor surfaces.',c:['Driveways & paths','Car parks & loading areas','Building facades','Graffiti removal','Outdoor furniture','Concrete & paving']},
+  {n:'Window Cleaning',img:'https://faithpropertyservices.com.au/wp-content/uploads/2026/03/commercial-cleaning-768x575.jpg',d:'Streak-free internal and external window and glass cleaning for all commercial properties.',c:['Internal glass panels','External facades','Shopfronts & entries','Mirrors & partitions','High-rise & elevated','Solar panels & skylights']}
+];
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60),{passive:true});
+document.getElementById('burgerBtn').addEventListener('click',()=>{const nl=document.querySelector('.nav-links'),open=nl.style.display==='flex';if(!open){Object.assign(nl.style,{display:'flex',flexDirection:'column',position:'fixed',inset:'0',background:'rgba(2,14,26,.97)',alignItems:'center',justifyContent:'center',gap:'2.5rem',fontSize:'1.1rem',zIndex:'999'});nl.insertAdjacentHTML('afterbegin','<button onclick="this.parentElement.style.display=\'none\'" style="position:absolute;top:2rem;right:2rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer"><i class=\'bi bi-x\'></i></button>')}else nl.style.display='none'});
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target)}}),{threshold:.08});
+document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(el=>ro.observe(el));
+const img=document.getElementById('selImg'),title=document.getElementById('selTitle'),desc=document.getElementById('selDesc'),checks=document.getElementById('selChecks'),panel=document.getElementById('selPanel');
+function setSvc(i){const s=SVCS[i];panel.style.opacity='0';panel.style.transform='translateY(8px)';setTimeout(()=>{img.src=s.img;title.textContent=s.n;desc.textContent=s.d;checks.innerHTML=s.c.map(c=>`<li>${c}</li>`).join('');panel.style.transition='opacity .3s,transform .3s';panel.style.opacity='1';panel.style.transform='none'},200);document.querySelectorAll('.sel-btn').forEach((b,j)=>b.classList.toggle('active',j===i))}
+setSvc(0);
+document.querySelectorAll('.sel-btn').forEach((b,i)=>b.addEventListener('click',()=>setSvc(i)));
+</script>
+</body>
+</html>

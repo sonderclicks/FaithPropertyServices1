@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faith Property Services — Home</title>
+<meta name="description" content="Professional commercial cleaning across Victoria and New Zealand. 13+ years experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── HERO SCROLL REVEAL ── */
+#hero-scroll{height:320vh;position:relative}
+.hero-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.hs-dirty,.hs-clean{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hs-clean{z-index:1}
+.hs-dirty{z-index:2}
+/* Strong wipe-edge glow */
+.hs-wipe{position:absolute;top:-5%;bottom:-5%;width:80px;z-index:4;pointer-events:none;transform:skewX(-2deg);background:linear-gradient(90deg,transparent 0%,rgba(6,182,212,.18) 30%,rgba(200,245,255,.88) 50%,rgba(6,182,212,.18) 70%,transparent 100%);filter:blur(3px);opacity:0;transition:opacity .3s}
+.hs-wipe::before,.hs-wipe::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#fff;filter:blur(1px);animation:sparkle 1.1s ease-in-out infinite}
+.hs-wipe::before{top:32%}.hs-wipe::after{top:68%;animation-delay:.55s}
+@keyframes sparkle{0%,100%{opacity:.2;transform:translateX(-50%) scale(.7)}50%{opacity:1;transform:translateX(-50%) scale(1.5)}}
+/* BA chips */
+.hs-chips{position:absolute;top:1.3rem;left:50%;transform:translateX(-50%);z-index:8;display:flex;gap:.4rem;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.hsc{padding:.3rem .85rem;border-radius:99px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.45);backdrop-filter:blur(8px);transition:opacity .6s}
+.hsc.cc{color:var(--teal);border-color:rgba(6,182,212,.45);background:rgba(6,182,212,.12);opacity:0}
+/* TEXT CONTENT — sits inside a dark gradient base for guaranteed readability */
+.hs-text-base{position:absolute;bottom:0;left:0;right:0;z-index:7;padding:6rem 5vw 4.5rem;background:linear-gradient(to top,rgba(2,14,26,1) 0%,rgba(2,14,26,.98) 25%,rgba(2,14,26,.92) 50%,rgba(2,14,26,.72) 68%,rgba(2,14,26,.2) 82%,transparent 93%);text-align:center}
+.hs-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;opacity:0;animation:fadeUp .6s .3s forwards;display:inline-flex;align-items:center;gap:.5rem;justify-content:center;background:rgba(2,14,26,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:.38rem 1.1rem;border-radius:99px;border:1px solid rgba(6,182,212,.3)}
+.hs-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:dotpulse 2s infinite}
+@keyframes dotpulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hs-title{font-size:clamp(2.8rem,6.5vw,6rem);font-weight:900;letter-spacing:-.04em;line-height:.95;margin-bottom:1.2rem;opacity:0;animation:fadeUp .75s .45s forwards;text-shadow:0 2px 40px rgba(0,0,0,.6)}
+.hs-title .g1{display:block;color:#fff}
+.hs-title .g2{display:block;background:linear-gradient(105deg,var(--teal) 0%,#38bdf8 50%,var(--amber) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hs-sub{font-size:clamp(.92rem,1.4vw,1.08rem);color:rgba(255,255,255,.82);line-height:1.72;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .6s forwards;text-shadow:0 1px 12px rgba(0,0,0,.8);max-width:560px;margin-left:auto;margin-right:auto}
+.hs-actions{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .75s forwards}
+/* mini stat strip */
+.hs-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:2.2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);opacity:0;animation:fadeUp .7s .9s forwards}
+.hs-stat-v{font-size:1.6rem;font-weight:900;color:var(--teal);letter-spacing:-.025em;line-height:1}
+.hs-stat-l{font-size:.68rem;color:rgba(255,255,255,.42);margin-top:.15rem;font-weight:500;letter-spacing:.04em}
+/* Progress bar */
+.hs-progress{position:absolute;bottom:0;left:0;right:0;z-index:9;height:2px;background:rgba(255,255,255,.06)}
+.hs-pfill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0;transition:width .04s linear}
+/* scroll hint */
+.hs-hint{position:absolute;top:1.4rem;right:4vw;z-index:9;display:flex;align-items:center;gap:.5rem;opacity:0;animation:fadeUp .6s 1.1s forwards}
+.hs-hint span{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.bounce{animation:sb 2s ease-in-out infinite}
+@keyframes sb{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ── SERVICES TEASER ── */
+#svc-teaser{padding:7rem 5vw;background:var(--bg)}
+.svc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.3rem;margin-top:3rem;max-width:1060px}
+.svc-feat{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3}
+.svc-feat img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.svc-feat:hover img{transform:scale(1.06)}
+.svc-feat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,14,26,.92) 0%,rgba(2,14,26,.3) 60%,transparent 100%)}
+.svc-feat-info{position:absolute;bottom:1.5rem;left:1.5rem;z-index:1}
+.svc-feat-info h3{font-size:1.1rem;font-weight:800;margin-bottom:.3rem}
+.svc-feat-info p{font-size:.78rem;color:rgba(255,255,255,.5)}
+.svc-feat-tag{position:absolute;top:1.1rem;left:1.1rem;padding:.28rem .75rem;border-radius:99px;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.35);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.svc-more{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;font-size:.88rem;font-weight:700;color:var(--teal);transition:gap .2s}
+.svc-more:hover{gap:.85rem}
+
+/* ── BEFORE/AFTER SLIDER ── */
+#baslider{padding:7rem 5vw;background:var(--bg2)}
+.slider-outer{position:relative;max-width:1060px;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(6,182,212,.12),0 40px 100px rgba(0,0,0,.65);cursor:ew-resize;user-select:none;margin-top:3rem}
+.slider-outer::before{content:'';display:block;padding-top:56.25%}
+.slider-inner{position:absolute;inset:0}
+.sl-b,.sl-a{position:absolute;inset:0}
+.sl-b img,.sl-a img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.sl-a{clip-path:inset(0 50% 0 0)}
+.sl-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;z-index:5;pointer-events:none;transform:translateX(-50%)}
+.sl-circle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.sl-circle svg{width:20px;height:20px;fill:#000}
+.sl-lbl{position:absolute;top:1.2rem;z-index:6;padding:.3rem .85rem;border-radius:99px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);backdrop-filter:blur(8px);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;pointer-events:none}
+.sl-lbl.b{left:1.2rem}.sl-lbl.a{right:1.2rem;color:var(--teal);border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.12)}
+
+/* ── CLEANLINESS METER ── */
+#meter{padding:7rem 5vw;background:var(--bg);position:relative;overflow:hidden}
+#meter::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(6,182,212,.04) 1px,transparent 1px);background-size:32px 32px}
+.meter-wrap{max-width:900px;margin:3.5rem auto 0}
+.mtrack{position:relative;height:8px;background:rgba(255,255,255,.06);border-radius:99px;margin-bottom:3rem;overflow:visible}
+.mfill{position:absolute;inset:0;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:99px;width:0;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.mmarks{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
+.mmark{width:16px;height:16px;border-radius:50%;background:var(--bg);border:2px solid rgba(255,255,255,.14);transition:all .4s}
+.mmark.lit{border-color:var(--teal);background:var(--teal);box-shadow:0 0 16px rgba(6,182,212,.6)}
+.mmark.lit.last{border-color:var(--amber);background:var(--amber);box-shadow:0 0 16px rgba(245,158,11,.6)}
+.mstages{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.mstage{text-align:center;opacity:.28;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.mstage.lit{opacity:1;transform:none}
+.ms-ico{width:48px;height:48px;border-radius:50%;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.14);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--teal);margin:0 auto .8rem;transition:all .4s}
+.mstage.lit .ms-ico{background:rgba(6,182,212,.15);box-shadow:0 0 24px rgba(6,182,212,.2)}
+.mstage.lit.last .ms-ico{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.3);color:var(--amber);box-shadow:0 0 24px rgba(245,158,11,.2)}
+.ms-t{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+.ms-d{font-size:.75rem;color:rgba(255,255,255,.38);line-height:1.5}
+
+/* ── TESTIMONIALS ── */
+#testi{padding:7rem 5vw;background:var(--bg2)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3.5rem;max-width:1060px}
+.tcard{padding:2.4rem;border-radius:18px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.022);position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.tcard::before{content:'\201C';position:absolute;top:.3rem;right:1.5rem;font-size:8rem;line-height:1;color:rgba(6,182,212,.07);font-family:Georgia,serif;pointer-events:none}
+.tcard:hover{border-color:rgba(6,182,212,.22);transform:translateY(-4px)}
+.tstars{color:#fbbf24;font-size:.85rem;letter-spacing:.06em;margin-bottom:.9rem}
+.ttext{font-size:.9rem;line-height:1.76;color:rgba(255,255,255,.66);margin-bottom:1.6rem;font-style:italic;position:relative;z-index:1}
+.tauthor{display:flex;align-items:center;gap:.9rem}
+.tphoto{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid rgba(6,182,212,.3)}
+.tname{font-size:.87rem;font-weight:700}
+.trole{font-size:.72rem;color:rgba(255,255,255,.36);margin-top:.1rem}
+
+@media(max-width:768px){
+  /* Hero */
+  #hero-scroll{height:260vh}
+  .hs-text-base{padding:4.5rem 5vw 3rem}
+  .hs-title{font-size:clamp(2.4rem,8vw,3.8rem);line-height:1}
+  .hs-sub{font-size:.9rem;margin-bottom:1.5rem}
+  .hs-eyebrow{font-size:.62rem;letter-spacing:.1em}
+  .hs-actions{gap:.65rem}
+  .hs-actions .btn{padding:.75rem 1.3rem;font-size:.82rem}
+  .hs-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem;padding-top:1.5rem}
+  .hs-stat-v{font-size:1.5rem}
+  .hs-stat-l{font-size:.65rem}
+  .hs-hint{display:none}
+
+  /* Sections */
+  #svc-teaser,#baslider,#meter,#testi{padding:4.5rem 5vw}
+  .svc-cards{grid-template-columns:1fr}
+  .svc-more{margin-top:1.5rem;font-size:.84rem}
+
+  /* Slider — show drag hint */
+  .sl-circle{width:38px;height:38px}
+  .sl-circle svg{width:16px;height:16px}
+
+  /* Meter */
+  .mstages{grid-template-columns:1fr 1fr;gap:1rem}
+  .ms-ico{width:40px;height:40px;font-size:1rem}
+  .ms-t{font-size:.82rem}
+  .ms-d{font-size:.7rem}
+
+  /* Testimonials */
+  .tgrid{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+  .hs-title{font-size:clamp(2.2rem,9vw,3rem)}
+  .hs-actions{flex-direction:column;align-items:stretch}
+  .hs-actions .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="https://faithpropertyservices.com.au/wp-content/uploads/2025/10/main-logo.svg" alt="Faith Property Services" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="fb">Faith <span style="color:var(--teal)">Property</span></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-cta">Free Quote</a>
+  </div>
+  <button class="burger" id="burgerBtn"><i class="bi bi-list"></i></button>
+</nav>
+
+<!-- HERO SCROLL REVEAL -->
+<section id="hero-scroll">
+  <div class="hero-sticky">
+    <img class="hs-dirty" src="IMG_9266.PNG" alt="Before">
+    <img class="hs-clean" src="IMG_9267.PNG" alt="After">
+    <div class="hs-wipe" id="hsWipe"></div>
+    <div class="hs-chips">
+      <div class="hsc dc">Before</div>
+      <div class="hsc cc" id="hsCC">After</div>
+    </div>
+    <!-- Text lives inside its own dark gradient base — always readable -->
+    <div class="hs-text-base">
+      <div class="hs-eyebrow"><span class="hs-dot"></span> Commercial Cleaning · Victoria &amp; New Zealand</div>
+      <h1 class="hs-title">
+        <span class="g1">Watch Your Space</span>
+        <span class="g2">Transform.</span>
+      </h1>
+      <p class="hs-sub">Cleaner workplaces. Safer facilities. Better first impressions.<br>13+ years delivering spotless results you can count on.</p>
+      <div class="hs-actions">
+        <a href="contact.html" class="btn btn-amber"><i class="bi bi-calendar2-check-fill"></i> Get a Free Quote</a>
+        <a href="services.html" class="btn btn-outline"><i class="bi bi-grid-3x3-gap"></i> Our Services</a>
+      </div>
+      <div class="hs-stats">
+        <div><div class="hs-stat-v">13+</div><div class="hs-stat-l">Years Experience</div></div>
+        <div><div class="hs-stat-v">16+</div><div class="hs-stat-l">Services Offered</div></div>
+        <div><div class="hs-stat-v">2</div><div class="hs-stat-l">Regions — VIC &amp; NZ</div></div>
+        <div><div class="hs-stat-v">100%</div><div class="hs-stat-l">Insured &amp; Trained</div></div>
+      </div>
+    </div>
+    <div class="hs-hint"><span>Scroll to reveal</span><i class="bi bi-chevron-down bounce" style="color:rgba(255,255,255,.35)"></i></div>
+    <div class="hs-progress"><div class="hs-pfill" id="hsFill"></div></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div id="trust">
+  <div class="trust-track">
+    <div class="trust-item"><i class="bi bi-patch-check-fill"></i>13+ Years Experience</div>
+    <div class="trust-item"><i class="bi bi-shield-fill-check"></i>Fully Insured &amp; Trained</div>
+    <div class="trust-item"><i class="bi bi-leaf-fill"></i>Eco-Friendly Products</div>
+    <div class="trust-item"><i class="bi bi-geo-alt-fill"></i>Victoria-Wide Service</div>
+    <div class="trust-item"><i class="bi bi-telephone-fill"></i>1300 849 252</div>
+    <div class="trust-item"><i class="bi bi-star-fill"></i>5-Star Rated</div>
+    <div class="trust-item"><i class="bi bi-award-fill"></i>No Hidden Costs</div>
+    <div class="trust-item"><i class="bi bi-people-fill"></i>Commercial &amp; Industrial</div>
+    <!-- duplicate -->
+    <div class="trust-item"><i class="bi bi-patch-check-fill"></i>13+ Years Experience</div>
+    <div class="trust-item"><i class="bi bi-shield-fill-check"></i>Fully Insured &amp; Trained</div>
+    <div class="trust-item"><i class="bi bi-leaf-fill"></i>Eco-Friendly Products</div>
+    <div class="trust-item"><i class="bi bi-geo-alt-fill"></i>Victoria-Wide Service</div>
+    <div class="trust-item"><i class="bi bi-telephone-fill"></i>1300 849 252</div>
+    <div class="trust-item"><i class="bi bi-star-fill"></i>5-Star Rated</div>
+    <div class="trust-item"><i class="bi bi-award-fill"></i>No Hidden Costs</div>
+    <div class="trust-item"><i class="bi bi-people-fill"></i>Commercial &amp; Industrial</div>
+  </div>
+</div>
+
+<!-- FEATURED SERVICES -->
+<section id="svc-teaser">
+  <div class="sr"><div class="eyebrow">What We Do</div></div>
+  <div class="sr d1"><h2 class="h2">Cleaning Solutions for<br>Every Space</h2></div>
+  <div class="sr d2"><p class="lead">From corporate offices to hospitals, schools to industrial sites — we've got it covered.</p></div>
+  <div class="svc-cards">
+    <div class="svc-feat sr d1">
+      <img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/commercial-cleaning-768x575.jpg" alt="Commercial" loading="lazy">
+      <div class="svc-feat-overlay"></div>
+      <div class="svc-feat-tag">Core Service</div>
+      <div class="svc-feat-info"><h3>Commercial &amp; Office</h3><p>Offices, retail spaces &amp; corporate facilities</p></div>
+    </div>
+    <div class="svc-feat sr d2">
+      <img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/healthcare-edu-cleaning.jpg" alt="Healthcare" loading="lazy">
+      <div class="svc-feat-overlay"></div>
+      <div class="svc-feat-info"><h3>Healthcare &amp; Education</h3><p>Hospitals, clinics, schools &amp; universities</p></div>
+    </div>
+    <div class="svc-feat sr d3">
+      <img src="https://faithpropertyservices.com.au/wp-content/uploads/2026/03/industry-cleaning.jpg" alt="Industrial" loading="lazy">
+      <div class="svc-feat-overlay"></div>
+      <div class="svc-feat-info"><h3>Industrial</h3><p>Factories, warehouses &amp; production sites</p></div>
+    </div>
+  </div>
+  <a href="services.html" class="svc-more sr d4"><i class="bi bi-grid-3x3-gap"></i> View all 16 services <i class="bi bi-arrow-right"></i></a>
+</section>
+
+<div class="divline"></div>
+
+<!-- BEFORE/AFTER SLIDER -->
+<section id="baslider">
+  <div style="max-width:1060px">
+    <div class="sr"><div class="eyebrow">Real Results</div></div>
+    <div class="sr d1"><h2 class="h2">Drag to See<br>the Difference</h2></div>
+    <div class="sr d2"><p class="lead">Drag the handle to compare before and after — this is the standard we hold on every job.</p></div>
+  </div>
+  <div class="slider-outer sr d3" id="sliderOuter">
+    <div class="slider-inner">
+      <div class="sl-b"><img src="IMG_9266.PNG" alt="Before" draggable="false"></div>
+      <div class="sl-a" id="slA"><img src="IMG_9267.PNG" alt="After" draggable="false"></div>
+      <div class="sl-handle" id="slH"><div class="sl-circle"><svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div></div>
+      <div class="sl-lbl b">Before</div>
+      <div class="sl-lbl a">After</div>
+    </div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- CLEANLINESS METER -->
+<section id="meter">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <div class="sr"><div class="eyebrow">Our Promise</div></div>
+    <div class="sr d1"><h2 class="h2">Every Space. Every Time.</h2></div>
+    <div class="sr d2"><p class="lead" style="margin:0 auto">We don't leave until every stage of our cleaning standard is complete — no shortcuts.</p></div>
+  </div>
+  <div class="meter-wrap sr d3">
+    <div class="mtrack">
+      <div class="mfill" id="mF"></div>
+      <div class="mmarks">
+        <div class="mmark" id="mm0"></div><div class="mmark" id="mm1"></div>
+        <div class="mmark" id="mm2"></div><div class="mmark last" id="mm3"></div>
+      </div>
+    </div>
+    <div class="mstages">
+      <div class="mstage" id="ms0"><div class="ms-ico"><i class="bi bi-wind"></i></div><div class="ms-t">Dust Removed</div><div class="ms-d">All dust, cobwebs &amp; debris cleared</div></div>
+      <div class="mstage" id="ms1"><div class="ms-ico"><i class="bi bi-droplet-fill"></i></div><div class="ms-t">Surfaces Sanitised</div><div class="ms-d">All touchpoints disinfected &amp; wiped</div></div>
+      <div class="mstage" id="ms2"><div class="ms-ico"><i class="bi bi-grid"></i></div><div class="ms-t">Floors Restored</div><div class="ms-d">Vacuumed, mopped &amp; finished</div></div>
+      <div class="mstage last" id="ms3"><div class="ms-ico"><i class="bi bi-check-circle-fill"></i></div><div class="ms-t">Site Ready</div><div class="ms-d">Final inspection passed. Spotless.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-row">
+    <div class="stat-cell sr"><div class="snum tc" data-target="13" data-suffix="+">0+</div><div class="slbl">Years Experience</div></div>
+    <div class="stat-cell sr d1"><div class="snum ta" data-target="16" data-suffix="+">0+</div><div class="slbl">Service Types</div></div>
+    <div class="stat-cell sr d2"><div class="snum tc" data-target="2" data-suffix=" Regions">0</div><div class="slbl">VIC &amp; New Zealand</div></div>
+    <div class="stat-cell sr d3"><div class="snum ta" data-target="100" data-suffix="%">0%</div><div class="slbl">Insured &amp; Trained</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi">
+  <div class="sr"><div class="eyebrow">Reviews</div></div>
+  <div class="sr d1"><h2 class="h2">What Our Clients Say</h2></div>
+  <div class="tgrid">
+    <div class="tcard sr d1">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Their cleaning team is always on time, professional, and leaves our workspace spotless every single day. I couldn't recommend them more highly."</p>
+      <div class="tauthor"><img class="tphoto" src="https://faithpropertyservices.com.au/wp-content/uploads/2025/03/testimonial-01.png" alt="Sarah" loading="lazy" onerror="this.style.display='none'"><div><div class="tname">Sarah Thompson</div><div class="trole">Office Manager</div></div></div>
+    </div>
+    <div class="tcard sr d2">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Highly recommend Faith Property Services — friendly people always willing to go the extra mile. Reliable, thorough, and their work is absolutely first class."</p>
+      <div class="tauthor"><img class="tphoto" src="https://faithpropertyservices.com.au/wp-content/uploads/2025/11/testimonial-02.png" alt="Justin" loading="lazy" onerror="this.style.display='none'"><div><div class="tname">Justin King</div><div class="trole">President, Silverton Cricket Club</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="sr">
+    <h2 class="cta-headline"><span class="grad">Ready to Transform</span><br>Your Space?</h2>
+    <p>Get a free, no-obligation quote — tailored to your property, schedule, and budget.</p>
+    <div class="cta-row">
+      <a href="contact.html" class="btn btn-amber" style="font-size:.9rem;padding:.92rem 2rem"><i class="bi bi-envelope-fill"></i> Send an Enquiry</a>
+      <a href="tel:1300849252" class="cta-phone"><i class="bi bi-telephone-fill"></i> 1300 849 252</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="ft-logo"><img src="https://faithpropertyservices.com.au/wp-content/uploads/2025/10/main-logo.svg" alt="Faith Property Services" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="fb2">Faith Property Services</div><p>Creating cleaner, safer, and more professional spaces — one site at a time. Victoria &amp; New Zealand.</p></div>
+    <div class="ft-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+    <div class="ft-col"><h4>Services</h4><a href="services.html">Commercial</a><a href="services.html">Industrial</a><a href="services.html">End of Lease</a><a href="services.html">View All →</a></div>
+    <div class="ft-col"><h4>Contact</h4><a href="tel:1300849252">1300 849 252</a><a href="tel:0423204386">0423 204 386</a><span>Clyde North VIC 3978</span><span>Victoria &amp; New Zealand</span></div>
+  </div>
+  <div class="ft-bottom"><div class="ft-copy">&copy; 2025 Faith Property Services Pty Ltd.</div><div class="ft-tag">"Creating cleaner, safer, more professional spaces."</div></div>
+</footer>
+
+<a href="tel:1300849252" class="fab"><div class="fab-ring"></div><i class="bi bi-telephone-fill"></i> 1300 849 252</a>
+
+<script>
+const CHROME='C:/Users/Ramiru/AppData/Local/ms-playwright/chromium-1223/chrome-win64/chrome.exe';
+/* Nav */
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60),{passive:true});
+/* Mobile nav */
+document.getElementById('burgerBtn').addEventListener('click',()=>{
+  const nl=document.querySelector('.nav-links'),open=nl.style.display==='flex';
+  if(!open){Object.assign(nl.style,{display:'flex',flexDirection:'column',position:'fixed',inset:'0',background:'rgba(2,14,26,.97)',alignItems:'center',justifyContent:'center',gap:'2.5rem',fontSize:'1.1rem',zIndex:'999'});
+  nl.insertAdjacentHTML('afterbegin','<button onclick="this.parentElement.style.display=\'none\'" style="position:absolute;top:2rem;right:2rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer"><i class=\'bi bi-x\'></i></button>')}
+  else nl.style.display='none';
+});
+/* Scroll reveal */
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target)}}),{threshold:.08});
+document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(el=>ro.observe(el));
+/* Count-up */
+function countUp(el){const t=+el.dataset.target,sfx=el.dataset.suffix||'',d=1800,s=performance.now();const tick=n=>{const p=Math.min((n-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=Math.floor(e*t)+sfx;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.querySelectorAll('[data-target]').forEach(countUp)}),{threshold:.3}).observe(document.querySelector('.stats-section'));
+/* Hero scroll reveal */
+(function(){
+  const sec=document.getElementById('hero-scroll'),dirty=document.querySelector('.hs-dirty'),wipe=document.getElementById('hsWipe'),fill=document.getElementById('hsFill'),cc=document.getElementById('hsCC'),dc=document.querySelector('.dc');
+  let last=-1;
+  function upd(){
+    const rect=sec.getBoundingClientRect(),p=Math.max(0,Math.min(1,-rect.top/(sec.offsetHeight-innerHeight)));
+    if(Math.abs(p-last)<.001){requestAnimationFrame(upd);return}last=p;
+    const x=p*106-3,xb=x-5;
+    if(p<=.005)dirty.style.clipPath='none';
+    else if(p>=.995)dirty.style.clipPath='polygon(200% 0%,200% 0%,200% 100%,200% 100%)';
+    else dirty.style.clipPath=`polygon(${x}% 0%,200% 0%,200% 100%,${xb}% 100%)`;
+    wipe.style.opacity=(p>.01&&p<.99)?'1':'0';
+    if(p>.01&&p<.99)wipe.style.left=`calc(${x}% - 40px)`;
+    fill.style.width=p*100+'%';
+    dc.style.opacity=String(Math.max(0,1-p*3));
+    cc.style.opacity=String(Math.min(1,Math.max(0,(p-.25)/.3)));
+    requestAnimationFrame(upd);
+  }upd();
+})();
+/* Drag slider */
+(function(){
+  const out=document.getElementById('sliderOuter'),a=document.getElementById('slA'),h=document.getElementById('slH');
+  let drag=false;
+  function setP(x){const r=out.getBoundingClientRect(),p=Math.max(.02,Math.min(.98,(x-r.left)/r.width)),pct=p*100;a.style.clipPath=`inset(0 ${100-pct}% 0 0)`;h.style.left=pct+'%'}
+  setTimeout(()=>setP(out.getBoundingClientRect().left+out.offsetWidth*.5),100);
+  out.addEventListener('mousedown',e=>{drag=true;setP(e.clientX)});
+  out.addEventListener('touchstart',e=>{drag=true;setP(e.touches[0].clientX)},{passive:true});
+  addEventListener('mousemove',e=>{if(drag)setP(e.clientX)},{passive:true});
+  addEventListener('touchmove',e=>{if(drag)setP(e.touches[0].clientX)},{passive:true});
+  addEventListener('mouseup',()=>drag=false);addEventListener('touchend',()=>drag=false);
+})();
+/* Meter */
+(function(){
+  const sec=document.getElementById('meter'),fill=document.getElementById('mF');
+  const items=[0,1,2,3].map(i=>({ms:document.getElementById('ms'+i),mm:document.getElementById('mm'+i)}));
+  function upd(){const rect=sec.getBoundingClientRect(),p=Math.max(0,Math.min(1,(-rect.top+innerHeight*.5)/sec.offsetHeight));fill.style.width=p*100+'%';items.forEach((s,i)=>{const lit=p>=(i/(items.length-1))-.02;s.ms.classList.toggle('lit',lit);s.ms.classList.toggle('last',i===3&&lit);s.mm.classList.toggle('lit',lit);s.mm.classList.toggle('last',i===3&&lit)})}
+  addEventListener('scroll',upd,{passive:true});upd();
+})();
+</script>
+</body>
+</html>
